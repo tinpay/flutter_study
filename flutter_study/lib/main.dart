@@ -27,18 +27,14 @@ class MyApp extends StatelessWidget {
                       fontFamily: "NotoSerifJP",
                       color: Colors.black54),),
                   Container(
-                    color: Colors.white,
-                    margin: EdgeInsets.symmetric(
-                        vertical: 10.0, horizontal: 10.0),
-                    padding: EdgeInsets.all(10.0),
-                    child: Row(
+                    child: Column(
                       children: <Widget>[
-                        Icon(Icons.email, size: 20.0,),
-                        SizedBox(width: 10.0,),
-                        Text("tinpay@tinpay.xxx")
+                        Profile(),
+                        Profile(),
+                        Profile(),
                       ],
                     ),
-                  )
+                    ),
                 ],
               ),
             ),
@@ -49,4 +45,20 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class Profile extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      padding: EdgeInsets.all(10.0),
+      margin: EdgeInsets.all(10.0),
+      child: Row(
+          children: <Widget>[
+            Icon(Icons.email, size: 20.0,),
+            SizedBox(width: 10.0,),
+            Text("tinpay@tinpay.xxx")
+          ]),
+    );
+  }
+}
 
