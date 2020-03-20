@@ -16,9 +16,14 @@ class MyApp extends StatelessWidget {
         body: Container(
           margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
           child: Center(
-            child: CircleAvatar(
-              radius: 40,
-              backgroundImage: AssetImage("lib/images/4022779.rsz.png"),),
+            child: Column(
+              children: <Widget>[
+                CircleAvatar(
+                  radius: 40,
+                  backgroundImage: AssetImage("lib/images/4022779.rsz.png"),),
+                Text("tinpay", style: TextStyle(fontSize: 20.0),),
+              ],
+            ),
           ),
         ),
       ),
