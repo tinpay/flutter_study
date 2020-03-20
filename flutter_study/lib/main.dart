@@ -21,7 +21,8 @@ class MyApp extends StatelessWidget {
                 CircleAvatar(
                   radius: 40,
                   backgroundImage: AssetImage("lib/images/4022779.rsz.png"),),
-                Text("tinpay", style: TextStyle(fontSize: 20.0),),
+                Text("tinpay", style: TextStyle(
+                    fontSize: 20.0, fontFamily: "NotoSerifJP"),),
               ],
             ),
           ),
