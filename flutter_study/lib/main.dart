@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
             margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
             child: Center(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   CircleAvatar(
                     radius: 40,
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
                         Profile(),
                       ],
                     ),
-                    ),
+                  ),
                 ],
               ),
             ),
@@ -48,16 +49,11 @@ class MyApp extends StatelessWidget {
 class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      padding: EdgeInsets.all(10.0),
+    return Card(
       margin: EdgeInsets.all(10.0),
-      child: Row(
-          children: <Widget>[
-            Icon(Icons.email, size: 20.0,),
-            SizedBox(width: 10.0,),
-            Text("tinpay@tinpay.xxx")
-          ]),
+      child: ListTile(
+        leading: Icon(Icons.email, size: 20.0, color: Colors.amber),
+        title: Text("tinpay@tinpay.xxx"),),
     );
   }
 }
