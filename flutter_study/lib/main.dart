@@ -12,18 +12,22 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-        appBar: AppBar(title: Text("sample",),),
-        body: Container(
-          margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-          child: Center(
-            child: Column(
-              children: <Widget>[
-                CircleAvatar(
-                  radius: 40,
-                  backgroundImage: AssetImage("lib/images/4022779.rsz.png"),),
-                Text("tinpay", style: TextStyle(
-                    fontSize: 20.0, fontFamily: "NotoSerifJP"),),
-              ],
+        backgroundColor: Colors.amberAccent,
+        body: SafeArea(
+          child: Container(
+            margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+            child: Center(
+              child: Column(
+                children: <Widget>[
+                  CircleAvatar(
+                    radius: 40,
+                    backgroundImage: AssetImage("lib/images/4022779.rsz.png"),),
+                  Text("tinpay", style: TextStyle(
+                      fontSize: 20.0,
+                      fontFamily: "NotoSerifJP",
+                      color: Colors.black54),),
+                ],
+              ),
             ),
           ),
         ),
