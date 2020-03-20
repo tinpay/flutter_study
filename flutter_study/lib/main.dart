@@ -26,6 +26,19 @@ class MyApp extends StatelessWidget {
                       fontSize: 20.0,
                       fontFamily: "NotoSerifJP",
                       color: Colors.black54),),
+                  Container(
+                    color: Colors.white,
+                    margin: EdgeInsets.symmetric(
+                        vertical: 10.0, horizontal: 10.0),
+                    padding: EdgeInsets.all(10.0),
+                    child: Row(
+                      children: <Widget>[
+                        Icon(Icons.email, size: 20.0,),
+                        SizedBox(width: 10.0,),
+                        Text("tinpay@tinpay.xxx")
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),
