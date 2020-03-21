@@ -22,11 +22,22 @@ class MyApp extends StatelessWidget {
                 children: <Widget>[
                   CircleAvatar(
                     radius: 40,
-                    backgroundImage: AssetImage("lib/images/4022779.rsz.png"),),
-                  Text("tinpay", style: TextStyle(
-                      fontSize: 20.0,
-                      fontFamily: "NotoSerifJP",
-                      color: Colors.black54),),
+                    backgroundImage: AssetImage("lib/images/4022779.rsz.png"),
+                  ),
+                  Text(
+                    "tinpay",
+                    style: TextStyle(
+                        fontSize: 20.0,
+                        fontFamily: "NotoSerifJP",
+                        color: Colors.black54),
+                  ),
+                  SizedBox(
+                    height: 30.0,
+                    width: 200.0,
+                    child: Divider(
+                      color: Colors.amberAccent.shade700,
+                    ),
+                  ),
                   Container(
                     child: Column(
                       children: <Widget>[
@@ -53,8 +64,8 @@ class Profile extends StatelessWidget {
       margin: EdgeInsets.all(10.0),
       child: ListTile(
         leading: Icon(Icons.email, size: 20.0, color: Colors.amber),
-        title: Text("tinpay@tinpay.xxx"),),
+        title: Text("tinpay@tinpay.xxx"),
+      ),
     );
   }
 }
-
