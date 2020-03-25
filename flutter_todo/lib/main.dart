@@ -63,18 +63,59 @@ class TasksScreen extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(
-            child: Container(
-                decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(30),
-                topRight: Radius.circular(30),
-              ),
-            )),
-          ),
+          Expanded(child: TaskList()),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          Icons.add,
+        ),
+        backgroundColor: Colors.teal,
+        onPressed: () {
+          showModalBottomSheet(context: context, builder: buildBottomSheet);
+        },
+      ),
+    );
+  }
+
+  Widget buildBottomSheet(BuildContext context) {
+    return Container();
+  }
+}
+
+class TaskList extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(30),
+          topRight: Radius.circular(30),
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ListView(
+          children: <Widget>[
+            Task(),
+            Task(),
+            Task(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Task extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(
+        "buy chickens at supermarket.",
+      ),
+      trailing: Checkbox(value: false),
     );
   }
 }
