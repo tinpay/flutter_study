@@ -79,7 +79,50 @@ class TasksScreen extends StatelessWidget {
   }
 
   Widget buildBottomSheet(BuildContext context) {
-    return Container();
+    return Container(
+      color: Color(0xff757575),
+      child: Container(
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+        ),
+        child: Column(
+          children: <Widget>[
+            Text(
+              "Add Task",
+              style: TextStyle(
+                color: Colors.teal,
+                fontSize: 30,
+              ),
+            ),
+            TextFormField(
+              autofocus: true,
+              cursorColor: Colors.teal,
+              decoration: InputDecoration(
+                labelStyle: TextStyle(
+                  color: Colors.teal,
+                  decorationColor: Colors.teal,
+                ),
+                enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(width: 3.0, color: Colors.teal)),
+                focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(width: 3.0, color: Colors.teal)),
+              ),
+            ),
+            RaisedButton(
+              color: Colors.teal,
+              textColor: Colors.white,
+              child: Text("Add"),
+              onPressed: () {},
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
 
