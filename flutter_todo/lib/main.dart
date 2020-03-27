@@ -151,14 +151,43 @@ class TaskList extends StatelessWidget {
   }
 }
 
-class Task extends StatelessWidget {
+class Task extends StatefulWidget {
+  @override
+  _TaskState createState() => _TaskState();
+}
+
+class _TaskState extends State<Task> {
+  bool isChecked = false;
+
+  void changeCheckboxState(bool checkboxState) {
+    setState(() {
+      isChecked = checkboxState;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
         "buy chickens at supermarket.",
       ),
-      trailing: Checkbox(value: false),
+      trailing: TaskCheckBox(isChecked, changeCheckboxState),
+    );
+  }
+}
+
+class TaskCheckBox extends StatelessWidget {
+  final bool checkBoxState;
+  final Function toggleCheckboxState;
+
+  TaskCheckBox(this.checkBoxState, this.toggleCheckboxState);
+
+  @override
+  Widget build(BuildContext context) {
+    return Checkbox(
+      activeColor: Colors.teal,
+      value: checkBoxState,
+      onChanged: toggleCheckboxState,
     );
   }
 }
