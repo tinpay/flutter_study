@@ -29,7 +29,6 @@ class TaskList extends StatelessWidget {
                         .updateTask(task);
                   },
                   deleteTask: () {
-                    print("d");
                     Provider.of<TaskStore>(context, listen: false)
                         .deleteTask(task);
                   },
