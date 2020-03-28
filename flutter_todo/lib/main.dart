@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertodo/models/task.dart';
+import 'package:fluttertodo/task_list.dart';
 
 void main() => runApp(MyApp());
 
@@ -16,7 +18,19 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class TasksScreen extends StatelessWidget {
+class TasksScreen extends StatefulWidget {
+  @override
+  _TasksScreenState createState() => _TasksScreenState();
+}
+
+class _TasksScreenState extends State<TasksScreen> {
+  List<Task> tasks = [
+    Task(name: "buy milk1.", isDone: false),
+    Task(name: "buy milk2.", isDone: false),
+    Task(name: "buy milk3.", isDone: false),
+    Task(name: "buy milk4.", isDone: false),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +67,7 @@ class TasksScreen extends StatelessWidget {
                   height: 10,
                 ),
                 Text(
-                  "12 Tasks",
+                  "${tasks.length} Tasks",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 12,
@@ -63,7 +77,7 @@ class TasksScreen extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(child: TaskList()),
+          Expanded(child: TaskList(tasks)),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -122,72 +136,6 @@ class TasksScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class TaskList extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(30),
-          topRight: Radius.circular(30),
-        ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ListView(
-          children: <Widget>[
-            Task(),
-            Task(),
-            Task(),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class Task extends StatefulWidget {
-  @override
-  _TaskState createState() => _TaskState();
-}
-
-class _TaskState extends State<Task> {
-  bool isChecked = false;
-
-  void changeCheckboxState(bool checkboxState) {
-    setState(() {
-      isChecked = checkboxState;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(
-        "buy chickens at supermarket.",
-      ),
-      trailing: TaskCheckBox(isChecked, changeCheckboxState),
-    );
-  }
-}
-
-class TaskCheckBox extends StatelessWidget {
-  final bool checkBoxState;
-  final Function toggleCheckboxState;
-
-  TaskCheckBox(this.checkBoxState, this.toggleCheckboxState);
-
-  @override
-  Widget build(BuildContext context) {
-    return Checkbox(
-      activeColor: Colors.teal,
-      value: checkBoxState,
-      onChanged: toggleCheckboxState,
     );
   }
 }
