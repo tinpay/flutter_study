@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertodo/models/task_store.dart';
-import 'package:fluttertodo/task_screen.dart';
+import 'package:fluttertodo/screens/task_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());

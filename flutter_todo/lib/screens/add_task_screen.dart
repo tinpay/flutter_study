@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertodo/models/task.dart';
 import 'package:fluttertodo/models/task_store.dart';
 import 'package:provider/provider.dart';
 
@@ -49,9 +50,8 @@ class AddTaskScreen extends StatelessWidget {
               textColor: Colors.white,
               child: Text("Add"),
               onPressed: () {
-//                Task task = Task(name: textValue);
-                Provider.of<TaskStore>(context, listen: false)
-                    .addTask(textValue);
+                Task task = Task(name: textValue);
+                Provider.of<TaskStore>(context, listen: false).addTask(task);
                 Navigator.pop(context);
               },
             )

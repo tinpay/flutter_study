@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertodo/main.dart';
-import 'package:fluttertodo/task_tile.dart';
+import 'package:fluttertodo/widgets/task_tile.dart';
 import 'package:provider/provider.dart';
 import 'package:fluttertodo/models/task_store.dart';
 
