@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertodo/models/task.dart';
 import 'package:fluttertodo/task_list.dart';
+import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,17 +14,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: TasksScreen(),
+      home: ChangeNotifierProvider(
+        create: (context) => TaskStore(),
+        child: TasksScreen(),
+      ),
     );
   }
 }
 
-class TasksScreen extends StatefulWidget {
-  @override
-  _TasksScreenState createState() => _TasksScreenState();
-}
-
-class _TasksScreenState extends State<TasksScreen> {
+class TaskStore extends ChangeNotifier {
   List<Task> tasks = [
     Task(name: "buy milk1.", isDone: false),
     Task(name: "buy milk2.", isDone: false),
@@ -31,6 +30,17 @@ class _TasksScreenState extends State<TasksScreen> {
     Task(name: "buy milk4.", isDone: false),
   ];
 
+  int get taskCount {
+    return tasks.length;
+  }
+
+  void addTask(Task task) {
+    tasks.add(task);
+    notifyListeners();
+  }
+}
+
+class TasksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +77,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   height: 10,
                 ),
                 Text(
-                  "${tasks.length} Tasks",
+                  "${Provider.of<TaskStore>(context).taskCount} Tasks",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 12,
@@ -77,7 +87,7 @@ class _TasksScreenState extends State<TasksScreen> {
               ],
             ),
           ),
-          Expanded(child: TaskList(tasks)),
+          Expanded(child: TaskList()),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -89,12 +99,11 @@ class _TasksScreenState extends State<TasksScreen> {
           showModalBottomSheet(
               context: context,
               builder: (context) => AddTaskWidget((newTaskTitle) {
-                    setState(() {
-                      tasks.add(Task(
-                        name: newTaskTitle,
-                        isDone: false,
-                      ));
-                    });
+                    Provider.of<TaskStore>(context, listen: false).addTask(Task(
+                      name: newTaskTitle,
+                      isDone: false,
+                    ));
+
                     Navigator.pop(context);
                     print("add ${newTaskTitle}");
                   }));
@@ -154,6 +163,7 @@ class AddTaskWidget extends StatelessWidget {
               textColor: Colors.white,
               child: Text("Add"),
               onPressed: () {
+                print("add");
                 this.addTaskComplete(textValue);
               },
             )
