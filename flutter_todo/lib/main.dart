@@ -86,13 +86,32 @@ class _TasksScreenState extends State<TasksScreen> {
         ),
         backgroundColor: Colors.teal,
         onPressed: () {
-          showModalBottomSheet(context: context, builder: buildBottomSheet);
+          showModalBottomSheet(
+              context: context,
+              builder: (context) => AddTaskWidget((newTaskTitle) {
+                    setState(() {
+                      tasks.add(Task(
+                        name: newTaskTitle,
+                        isDone: false,
+                      ));
+                    });
+                    Navigator.pop(context);
+                    print("add ${newTaskTitle}");
+                  }));
         },
       ),
     );
   }
+}
 
-  Widget buildBottomSheet(BuildContext context) {
+class AddTaskWidget extends StatelessWidget {
+  String textValue;
+  final Function addTaskComplete;
+
+  AddTaskWidget(this.addTaskComplete);
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       color: Color(0xff757575),
       child: Container(
@@ -126,12 +145,17 @@ class _TasksScreenState extends State<TasksScreen> {
                 focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(width: 3.0, color: Colors.teal)),
               ),
+              onChanged: (newText) {
+                textValue = newText;
+              },
             ),
             RaisedButton(
               color: Colors.teal,
               textColor: Colors.white,
               child: Text("Add"),
-              onPressed: () {},
+              onPressed: () {
+                this.addTaskComplete(textValue);
+              },
             )
           ],
         ),
