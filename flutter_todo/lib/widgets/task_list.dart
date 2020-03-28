@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertodo/main.dart';
+import 'package:fluttertodo/models/task.dart';
+import 'package:fluttertodo/models/task_store.dart';
 import 'package:fluttertodo/widgets/task_tile.dart';
 import 'package:provider/provider.dart';
-import 'package:fluttertodo/models/task_store.dart';
 
 class TaskList extends StatelessWidget {
   @override
@@ -21,10 +21,12 @@ class TaskList extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: ListView.builder(
               itemBuilder: (context, index) {
+                Task task = taskData.tasks[index];
                 return TaskTile(
-                    task: taskData.tasks[index],
+                    task: task,
                     toggleCheckbox: (value) {
-                      taskData.tasks[index].toggleDone();
+                      Provider.of<TaskStore>(context, listen: false)
+                          .updateTask(task);
                     });
               },
               itemCount: taskData.taskCount,
