@@ -5,67 +5,74 @@ void main() => runApp(XylophoneApp());
 
 class XylophoneApp extends StatelessWidget {
   @override
-  void playSound({int soundNumber, String text}) {
-    var player = AudioCache();
-    player.play('note$soundNumber.wav');
-  }
-
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Colors.black,
         body: SafeArea(
           child: Scaffold(
-            appBar: AppBar(
-              title: Text("xylophone"),
-            ),
+//            appBar: AppBar(
+//              title: Text("xylophone"),
+//            ),
             body: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                FlatButton(
+                XylophoneButton(
+                  soundNumber: 1,
                   color: Colors.red,
-                  onPressed: () {
-                    playSound(soundNumber: 1, text: "test");
-                  },
                 ),
-                FlatButton(
+                XylophoneButton(
+                  soundNumber: 2,
                   color: Colors.orange,
-                  onPressed: () {
-                    playSound(text: "test", soundNumber: 2);
-                  },
                 ),
-                FlatButton(
+                XylophoneButton(
+                  soundNumber: 3,
                   color: Colors.yellow,
-                  onPressed: () {
-                    playSound(soundNumber: 3);
-                  },
                 ),
-                FlatButton(
+                XylophoneButton(
+                  soundNumber: 4,
                   color: Colors.green,
-                  onPressed: () {
-                    playSound(soundNumber: 4);
-                  },
                 ),
-                FlatButton(
+                XylophoneButton(
+                  soundNumber: 5,
                   color: Colors.blue.shade900,
-                  onPressed: () {
-                    playSound(soundNumber: 5);
-                  },
                 ),
-                FlatButton(
+                XylophoneButton(
+                  soundNumber: 6,
                   color: Colors.blue,
-                  onPressed: () {
-                    playSound(soundNumber: 6);
-                  },
                 ),
-                FlatButton(
+                XylophoneButton(
+                  soundNumber: 7,
                   color: Colors.purple,
-                  onPressed: () {
-                    playSound(soundNumber: 7);
-                  },
                 ),
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class XylophoneButton extends StatelessWidget {
+  final int soundNumber;
+  final Color color;
+
+  XylophoneButton({this.soundNumber, this.color});
+
+  void playSound({int soundNumber, String text}) {
+    var player = AudioCache();
+    player.play('note$soundNumber.wav');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: FlatButton(
+        color: color,
+        onPressed: () {
+          playSound(soundNumber: soundNumber);
+        },
       ),
     );
   }
