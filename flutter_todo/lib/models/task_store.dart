@@ -29,4 +29,10 @@ class TaskStore extends ChangeNotifier {
     print("done");
     notifyListeners();
   }
+
+  void deleteTask(Task task) {
+    _tasks.remove(task);
+    print("delete");
+    notifyListeners();
+  }
 }

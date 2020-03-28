@@ -23,11 +23,17 @@ class TaskList extends StatelessWidget {
               itemBuilder: (context, index) {
                 Task task = taskData.tasks[index];
                 return TaskTile(
-                    task: task,
-                    toggleCheckbox: (value) {
-                      Provider.of<TaskStore>(context, listen: false)
-                          .updateTask(task);
-                    });
+                  task: task,
+                  toggleCheckbox: (value) {
+                    Provider.of<TaskStore>(context, listen: false)
+                        .updateTask(task);
+                  },
+                  deleteTask: () {
+                    print("d");
+                    Provider.of<TaskStore>(context, listen: false)
+                        .deleteTask(task);
+                  },
+                );
               },
               itemCount: taskData.taskCount,
             ),
