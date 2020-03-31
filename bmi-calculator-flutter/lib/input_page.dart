@@ -18,6 +18,8 @@ enum Gender {
 class _InputPageState extends State<InputPage> {
   Gender gender = Gender.None;
 
+  int height = 180;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,6 +27,7 @@ class _InputPageState extends State<InputPage> {
         title: Text('BMI CALCULATOR'),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
             child: Row(
@@ -64,8 +67,57 @@ class _InputPageState extends State<InputPage> {
           ),
           Expanded(
             child: ReusableCard(
-              color: activeColor,
-            ),
+                color: activeColor,
+                cardChild: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        "HEIGHT",
+                      ),
+                    ),
+                    Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        textBaseline: TextBaseline.ideographic,
+                        children: <Widget>[
+                          Text(
+                            height.toString(),
+                            style: TextStyle(
+                              fontSize: 50,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          Text(
+                            "cm",
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: SliderTheme(
+                        data: SliderThemeData(
+                          activeTrackColor: Colors.white,
+                          inactiveTrackColor: Colors.pink,
+                        ),
+                        child: Slider(
+                          value: height.toDouble(),
+                          min: 140,
+                          max: 190,
+                          onChanged: (newValue) {
+                            setState(() {
+                              height = newValue.toInt();
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                )),
           ),
           Expanded(
             child: Row(
