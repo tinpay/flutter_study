@@ -19,6 +19,7 @@ class _InputPageState extends State<InputPage> {
   Gender gender = Gender.None;
 
   int height = 180;
+  int weight = 60;
 
   @override
   Widget build(BuildContext context) {
@@ -125,6 +126,34 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: ReusableCard(
                     color: activeColor,
+                    cardChild: Column(
+                      children: <Widget>[
+                        Text("WEIGHT"),
+                        Text(
+                          weight.toString(),
+                          style: TextStyle(
+                              fontSize: 50, fontWeight: FontWeight.w700),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            FloatingActionButton(
+                              backgroundColor: Colors.grey,
+                              child: Icon(
+                                Icons.remove,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            FloatingActionButton(
+                              backgroundColor: Colors.grey,
+                              child: Icon(Icons.add),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 Expanded(
@@ -135,9 +164,14 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            color: Colors.pink,
-            height: 88,
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, "/result");
+            },
+            child: Container(
+              color: Colors.pink,
+              height: 88,
+            ),
           )
         ],
       ),
@@ -184,6 +218,7 @@ class ReusableCard extends StatelessWidget {
       child: cardChild,
 //                    color: Colors.grey,
       margin: EdgeInsets.all(20),
+      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 0),
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(10),
