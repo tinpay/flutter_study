@@ -9,10 +9,12 @@ class RoundedTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      onChanged: (value) {
-        //Do something with the user input.
-      },
+      style: TextStyle(color: Colors.black),
+      onChanged: onChanged,
       decoration: InputDecoration(
+//        fillColor: Colors.black,
+//        focusColor: Colors.black,
+//        hoverColor: Colors.black,
         hintText: hintText,
         contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
         border: OutlineInputBorder(
