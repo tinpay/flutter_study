@@ -58,58 +58,67 @@ class _ChatScreenState extends State<ChatScreen> {
         backgroundColor: Colors.lightBlueAccent,
       ),
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            StreamBuilder<QuerySnapshot>(
-              stream: _firestore.collection("messages").snapshots(),
-              builder: (context, snapshots) {
-                if (snapshots.hasData) {
-                  final messages = snapshots.data.documents;
+        child: Container(
+          color: Colors.white,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              StreamBuilder<QuerySnapshot>(
+                stream: _firestore.collection("messages").snapshots(),
+                builder: (context, snapshots) {
+                  if (snapshots.hasData) {
+                    final messages = snapshots.data.documents;
 
-                  List<Widget> messagesWidget = [];
-                  for (var message in messages) {
-                    messagesWidget.add(Text(
-                        "${message.data["text"]} ${message.data["sender"]}"));
+                    List<Widget> messagesWidget = [];
+                    for (var message in messages) {
+                      messagesWidget.add(Text(
+                        "${message.data["text"]} ${message.data["sender"]}",
+                        style: TextStyle(fontSize: 30),
+                      ));
+                    }
+                    return Expanded(
+                      child: ListView(
+                        children: messagesWidget,
+                      ),
+                    );
+                  } else {
+                    return Container();
                   }
-                  return Column(
-                    children: messagesWidget,
-                  );
-                }
-              },
-            ),
-            Container(
-              decoration: kMessageContainerDecoration,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    child: TextField(
-                      onChanged: (value) {
-                        //Do something with the user input.
-                        messageText = value;
-                      },
-                      decoration: kMessageTextFieldDecoration,
-                    ),
-                  ),
-                  FlatButton(
-                    onPressed: () {
-                      //Implement send functionality.
-                      _firestore.collection("messages").add({
-                        "text": messageText,
-                        "sender": loggedInUser.email,
-                      });
-                    },
-                    child: Text(
-                      'Send',
-                      style: kSendButtonTextStyle,
-                    ),
-                  ),
-                ],
+                },
               ),
-            ),
-          ],
+              Container(
+                decoration: kMessageContainerDecoration,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Expanded(
+                      child: TextField(
+                        onChanged: (value) {
+                          //Do something with the user input.
+                          messageText = value;
+                        },
+                        decoration: kMessageTextFieldDecoration,
+                      ),
+                    ),
+                    FlatButton(
+                      onPressed: () {
+                        //Implement send functionality.
+                        _firestore.collection("messages").add({
+                          "text": messageText,
+                          "sender": loggedInUser.email,
+                        });
+                      },
+                      child: Text(
+                        'Send',
+                        style: kSendButtonTextStyle,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
