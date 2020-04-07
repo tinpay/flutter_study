@@ -10,10 +10,13 @@ class ChatScreen extends StatefulWidget {
   _ChatScreenState createState() => _ChatScreenState();
 }
 
+FirebaseUser loggedInUser;
+
 class _ChatScreenState extends State<ChatScreen> {
+  final messageTextController = TextEditingController();
   Firestore _firestore = Firestore.instance;
   FirebaseAuth _auth = FirebaseAuth.instance;
-  FirebaseUser loggedInUser;
+
   String messageText;
 
   @override
@@ -72,6 +75,10 @@ class _ChatScreenState extends State<ChatScreen> {
                   children: <Widget>[
                     Expanded(
                       child: TextField(
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                        controller: messageTextController,
                         onChanged: (value) {
                           //Do something with the user input.
                           messageText = value;
@@ -81,11 +88,11 @@ class _ChatScreenState extends State<ChatScreen> {
                     ),
                     FlatButton(
                       onPressed: () {
-                        //Implement send functionality.
                         _firestore.collection("messages").add({
                           "text": messageText,
                           "sender": loggedInUser.email,
                         });
+                        messageTextController.clear();
                       },
                       child: Text(
                         'Send',
@@ -112,7 +119,7 @@ class MessageStream extends StatelessWidget {
       stream: _firestore.collection("messages").snapshots(),
       builder: (context, snapshots) {
         if (snapshots.hasData) {
-          final messages = snapshots.data.documents;
+          final messages = snapshots.data.documents.reversed;
 
           List<Widget> messagesWidget = [];
           for (var message in messages) {
@@ -153,7 +160,9 @@ class MessageBubble extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: (loggedInUser.email == sender)
+            ? CrossAxisAlignment.end
+            : CrossAxisAlignment.start,
         children: <Widget>[
           Text(
             sender,
@@ -163,15 +172,27 @@ class MessageBubble extends StatelessWidget {
             ),
           ),
           Material(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: (loggedInUser.email == sender)
+                ? BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    bottomLeft: Radius.circular(30),
+                    bottomRight: Radius.circular(30),
+                  )
+                : BorderRadius.only(
+                    topRight: Radius.circular(30),
+                    bottomLeft: Radius.circular(30),
+                    bottomRight: Radius.circular(30),
+                  ),
             elevation: 5,
-            color: Colors.teal,
+            color: (loggedInUser.email == sender) ? Colors.teal : Colors.white,
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               child: Text(
                 this.text,
                 style: TextStyle(
-                  color: Colors.white,
+                  color: (loggedInUser.email == sender)
+                      ? Colors.white
+                      : Colors.black87,
                   fontSize: 15,
                 ),
               ),
