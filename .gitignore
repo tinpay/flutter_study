@@ -19,3 +19,5 @@ doc/api/
 *.js_
 *.js.deps
 *.js.map
+flash-chat-flutter/android/app/google-services.json
+flash-chat-flutter/ios/Runner/GoogleService-Info.plist
