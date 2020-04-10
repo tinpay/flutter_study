@@ -1,5 +1,6 @@
+import 'package:clima/services/location.dart';
+import 'package:clima/services/networking.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -11,12 +12,19 @@ class _LoadingScreenState extends State<LoadingScreen> {
   void initState() {
     super.initState();
     getLocation();
+    getData(latitude: 37.33020182, longitude: -122.02497163);
   }
 
-  void getLocation() async {
-    Position position = await Geolocator()
-        .getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
-    print(position);
+  Future<void> getLocation() async {
+    Location location = Location();
+    await location.getCurrentLocation();
+    print(location.latitude);
+  }
+
+  void getData({double latitude, double longitude}) async {
+    NetworkHelper helper = NetworkHelper(
+        "https://samples.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=b6907d289e10d714a6e88b30761fae22");
+    Map<String, dynamic> result = await helper.getData();
   }
 
   @override
